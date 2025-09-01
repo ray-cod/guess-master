@@ -1,0 +1,4 @@
+package com.guessing.gamemaster.controllers;
+
+public class MainViewController {
+}
