@@ -1,0 +1,233 @@
+/* main-menu.css - JavaFX-compatible (no custom variables or derive()) */
+
+/* Backdrop - fills the window and gives vignette */
+#backdrop {
+  -fx-background-color: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
+  -fx-background-image: url("https://res.cloudinary.com/dicqdr7wa/image/upload/f_auto,q_auto,w_1200/v1756832056/black-brick_iwr5bz.jpg");
+  -fx-background-repeat: stretch;
+  -fx-background-size: cover;
+  -fx-background-position: center center;
+}
+
+/* Card container */
+#card {
+  /* subtle vertical gradient for the card */
+  -fx-background-color: linear-gradient(
+    from 0% 0% to 0% 100%,
+    #0d0f14 0%,
+    #0a0c10 100%
+  );
+  -fx-background-radius: 12;
+  -fx-padding: 28 0 28 0;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 24, 0.3, 0, 6);
+  -fx-alignment: center;
+  -fx-spacing: 18;
+}
+
+/* Header area inside card */
+.card-header {
+  -fx-alignment: center;
+  -fx-padding: 4 24 8 24;
+}
+
+.label.title {
+    -fx-font-family: "Inter", "Segoe UI", "System";   /* replace with loaded custom font if available */
+    -fx-font-size: 56px;
+    -fx-font-weight: 700;
+    -fx-letter-spacing: 2px;
+    -fx-text-fill: linear-gradient(from 0% 0% to 100% 0%, #FFFFFF 0%, #DDE8FF 30%, #BFD4FF 100%);
+    -fx-effect: dropshadow(gaussian, rgba(45,108,223,0.16), 18, 0.2, 0, 6); /* soft colored glow */
+    -fx-padding: 0 0 6 0;
+    -fx-alignment: center;
+}
+
+.subtitle {
+  -fx-text-fill: #98a0aa;
+  -fx-font-size: 12.5px;
+}
+
+/* Identity row */
+.identity-row {
+  -fx-alignment: center-left;
+  -fx-spacing: 12;
+}
+
+.player-name {
+  -fx-background-color: #13161dcc;
+  -fx-background-radius: 8;
+  -fx-border-radius: 8;
+  -fx-prompt-text-fill: #8b96a1;
+  -fx-text-fill: #eceff4;
+  -fx-pref-height: 44;
+  -fx-border-color: transparent;
+  -fx-font-size: 14px;
+}
+
+/* Avatar button */
+.avatar-btn {
+  -fx-background-color: transparent;
+  -fx-border-color: rgba(255, 255, 255, 0.06);
+  -fx-border-radius: 50;
+  -fx-background-radius: 50;
+  -fx-pref-width: 44;
+  -fx-pref-height: 44;
+  -fx-cursor: hand;
+}
+.avatar-btn:hover {
+  -fx-background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Mode panel */
+.mode-panel {
+  -fx-padding: 0 24 0 24;
+}
+
+.section-label {
+  -fx-text-fill: #98a0aa;
+  -fx-font-size: 12px;
+  -fx-padding: 0 0 6 0;
+}
+
+/* Radio buttons in mode selector */
+.radio-button.mode-toggle {
+  -fx-background-color: transparent;
+  -fx-text-fill: #eceff4;
+  -fx-padding: 8 14 8 14;
+  -fx-font-size: 13px;
+  -fx-border-radius: 8;
+  -fx-background-radius: 8;
+  -fx-cursor: hand;
+}
+.radio-button.mode-toggle:hover {
+  -fx-background-color: rgba(255, 255, 255, 0.02);
+}
+/* selected styling: use explicit gradient */
+.radio-button.mode-toggle:selected {
+  -fx-background-color: linear-gradient(
+    from 0% 0% to 100% 0%,
+    #2d6cdf 0%,
+    #7a39f5 100%
+  );
+  -fx-text-fill: white;
+  -fx-font-weight: 600;
+  -fx-effect: dropshadow(gaussian, rgba(45, 108, 223, 0.18), 8, 0.2, 0, 2);
+}
+
+/* Options grid labels / controls */
+.option-label {
+  -fx-text-fill: #98a0aa;
+  -fx-font-size: 13px;
+}
+.label.option-value {
+  -fx-text-fill: #eceff4;
+  -fx-font-size: 13px;
+  -fx-padding: 0 6 0 6;
+}
+
+/* Spinner basic styling */
+.spinner {
+  -fx-font-size: 13px;
+}
+
+.spinner .increment-arrow,
+.spinner .decrement-arrow {
+  -fx-background-color: black;
+}
+
+/* Slider styling */
+.slider {
+  -fx-pref-width: 220;
+}
+.slider .track {
+  -fx-background-color: rgba(255, 255, 255, 0.06);
+  -fx-background-radius: 6;
+  -fx-padding: 4;
+}
+.slider .thumb {
+  -fx-background-color: #2d6cdf;
+  -fx-background-radius: 100;
+  -fx-effect: dropshadow(gaussian, rgba(45, 108, 223, 0.32), 8, 0.2, 0, 2);
+}
+
+/* Primary button */
+.button.btn-primary {
+  -fx-background-color: linear-gradient(
+    from 0% 0% to 0% 100%,
+    #2d6cdf 0%,
+    #7a39f5 100%
+  );
+  -fx-text-fill: white;
+  -fx-font-size: 15px;
+  -fx-font-weight: 600;
+  -fx-padding: 10 20 10 20;
+  -fx-background-radius: 10;
+  -fx-cursor: hand;
+  -fx-effect: dropshadow(gaussian, rgba(45, 108, 223, 0.14), 12, 0.2, 0, 4);
+  -fx-pref-height: 48;
+}
+.button.btn-primary:hover {
+  -fx-translate-y: -2;
+  -fx-effect: dropshadow(gaussian, rgba(45, 108, 223, 0.22), 18, 0.25, 0, 6);
+}
+.button.btn-primary:focused {
+  -fx-border-color: rgba(255, 255, 255, 0.12);
+  -fx-border-width: 2;
+  -fx-border-radius: 10;
+}
+
+/* Ghost (secondary) buttons */
+.button.btn-ghost {
+  -fx-background-color: transparent;
+  -fx-border-color: rgba(255, 255, 255, 0.06);
+  -fx-border-radius: 8;
+  -fx-text-fill: #eceff4;
+  -fx-padding: 8 12 8 12;
+  -fx-cursor: hand;
+  -fx-pref-width: 150;
+}
+.button.btn-ghost:hover {
+  -fx-background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Icon style buttons (footer) */
+.button.icon-btn {
+  -fx-background-color: transparent;
+  -fx-text-fill: #98a0aa;
+  -fx-padding: 6 10 6 10;
+  -fx-cursor: hand;
+}
+.button.icon-btn:hover {
+  -fx-text-fill: #eceff4;
+  -fx-background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Footer muted text */
+.label.muted {
+  -fx-text-fill: #98a0aa;
+  -fx-font-size: 12px;
+}
+
+/* Small responsive tweaks */
+@media screen and (max-width: 800px) {
+  #card {
+    -fx-pref-width: 560;
+  }
+  .slider {
+    -fx-pref-width: 160;
+  }
+}
+
+/* Focus and accessibility */
+.button:focused,
+.text-field:focused,
+.radio-button:focused {
+  -fx-effect: dropshadow(gaussian, rgba(45, 108, 223, 0.2), 10, 0.2, 0, 0);
+}
+
+/* Minimal tooltip style (if used) */
+.tooltip {
+  -fx-background-color: rgba(2, 6, 23, 0.9);
+  -fx-text-fill: #eceff4;
+  -fx-padding: 6 8 6 8;
+  -fx-background-radius: 6;
+}
