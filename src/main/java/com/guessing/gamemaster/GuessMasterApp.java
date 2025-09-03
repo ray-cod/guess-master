@@ -3,16 +3,15 @@ package com.guessing.gamemaster;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class GameMasterApp extends Application {
+public class GuessMasterApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(GameMasterApp.class.getResource("main-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(GuessMasterApp.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 640);
-        stage.setTitle("Game Master");
+        stage.setTitle("Guess Master");
         stage.setScene(scene);
         stage.show();
     }

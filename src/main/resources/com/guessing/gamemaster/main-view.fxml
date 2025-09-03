@@ -27,7 +27,7 @@
                     <children>
                         <VBox alignment="CENTER" prefHeight="105.0" prefWidth="780.0" spacing="6.0" styleClass="card-header">
                             <children>
-                                <Label styleClass="title" text="GAME MASTER" />
+                                <Label styleClass="title" text="GUESS MASTER" />
                                 <Label styleClass="subtitle" text="Can You Find The Depth Of My Mind" />
                             </children>
                         </VBox>
