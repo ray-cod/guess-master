@@ -9,7 +9,7 @@ public class GuessMasterApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(GuessMasterApp.class.getResource("main-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(GuessMasterApp.class.getResource("ui/main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 640);
         stage.setTitle("Guess Master");
         stage.setScene(scene);
