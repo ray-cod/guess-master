@@ -1,0 +1,136 @@
+.dialog-backdrop {
+    -fx-background-color: rgba(2,6,23,0.64);
+}
+
+.dialog-card {
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #0f1216 0%, #0b0d10 100%);
+    -fx-background-radius: 12;
+    -fx-padding: 18 22;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 32, 0.25, 0, 8);
+    -fx-max-width: 760px;
+    -fx-alignment: center;
+}
+
+.dialog-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #ffffff;
+    -fx-letter-spacing: 1px;
+}
+
+.dialog-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #98A0AA;
+}
+
+.summary-label {
+    -fx-text-fill: #98A0AA;
+    -fx-font-size: 11px;
+}
+.points-value {
+    -fx-text-fill: linear-gradient(from 0% 0% to 100% 0%, #BFFFFA 0%, #85C9FF 100%);
+    -fx-font-size: 22px;
+    -fx-font-weight: 700;
+}
+.total-value {
+    -fx-text-fill: #ECEFF4;
+    -fx-font-size: 18px;
+    -fx-font-weight: 600;
+}
+
+.btn-primary {
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #2D6CDF 0%, #7A39F5 100%);
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+}
+.btn-ghost {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255,255,255,0.06);
+    -fx-border-radius: 8;
+    -fx-text-fill: #ECEFF4;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+.icon-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #98A0AA;
+    -fx-cursor: hand;
+}
+
+.icon-close {
+    -fx-background-color: transparent;
+    -fx-text-fill: #98A0AA;
+    -fx-font-size: 14px;
+    -fx-padding: 4 8;
+    -fx-cursor: hand;
+}
+.muted { -fx-text-fill: #98A0AA; }
+.small { -fx-font-size: 11px; }
+
+/* Make the overall TitledPane background transparent so it fits the card */
+#breakdownPane {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255,255,255,0.04);
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+/* Title row (the clickable header) */
+#breakdownPane > .title {
+    -fx-background-color: transparent;
+    -fx-padding: 10 12;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* Title label text */
+#breakdownPane > .title .text {
+    -fx-fill: #ECEFF4;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-letter-spacing: 0.6px;
+}
+
+/* Arrow button (the small chevron) */
+#breakdownPane > .title .arrow-button {
+    -fx-background-color: transparent;
+    -fx-padding: 4;
+}
+
+/* Arrow shape color (makes chevron visible) */
+#breakdownPane > .title .arrow-button .arrow {
+    -fx-background-color: #98A0AA;
+    -fx-pref-width: 10;
+    -fx-pref-height: 10;
+}
+
+/* Change appearance when expanded */
+#breakdownPane:expanded > .title {
+    -fx-background-color: rgba(255,255,255,0.02);
+    -fx-border-radius: 8 8 0 0;
+}
+
+/* Rotate the arrow when expanded (nice UX affordance) */
+#breakdownPane:expanded > .title .arrow-button {
+    -fx-rotate: 180;
+}
+
+/* Content area (the collapsible pane) */
+#breakdownPane > .content {
+    -fx-background-color: rgba(255,255,255,0.025);
+    -fx-padding: 12;
+    -fx-background-radius: 0 0 8 8;
+}
+
+/* Text inside the content */
+#breakdownPane > .content .label,
+#breakdownPane > .content .text {
+    -fx-text-fill: #ECEFF4;
+    -fx-font-size: 13px;
+}
+
+/* Tighter spacing if you want the content less roomy */
+#breakdownPane .content * {
+    -fx-padding: 4 0 4 0;
+}

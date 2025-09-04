@@ -1,4 +1,4 @@
 package com.guessing.gamemaster.controllers;
 
-public class PostRoundViewController {
+public class PostRoundDialogController {
 }
