@@ -1,5 +1,3 @@
-/* game-view.css - modern dark theme */
-
 /* Backdrop - fills the window and gives vignette */
 .backdrop {
   -fx-background-color: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */

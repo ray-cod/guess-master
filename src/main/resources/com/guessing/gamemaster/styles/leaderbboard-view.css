@@ -1,0 +1,137 @@
+
+/*Card*/
+.card {
+  /* subtle vertical gradient for the card */
+  -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #0d0f14 0%, #0a0c10 100%);
+  -fx-background-radius: 12;
+  -fx-padding: 28 0 28 0;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 24, 0.3, 0, 6);
+  -fx-alignment: center;
+  -fx-spacing: 18;
+}
+
+/* Backdrop - fills the window and gives vignette */
+.backdrop {
+  -fx-background-color: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
+  -fx-background-image: url("https://res.cloudinary.com/dicqdr7wa/image/upload/f_auto,q_auto,w_1200/v1756832056/black-brick_iwr5bz.jpg");
+  -fx-background-repeat: stretch;
+  -fx-background-size: cover;
+  -fx-background-position: center center;
+}
+
+/* table Card */
+.card-table {
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #0d0f14 0%, #0a0c10 100%);
+    -fx-background-radius: 12;
+    -fx-padding: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 18, 0.2, 0, 6);
+}
+
+/* Page title */
+.page-title {
+    -fx-text-fill: #ECEFF4;
+    -fx-font-size: 28px;
+    -fx-font-weight: 700;
+}
+
+/* Muted text */
+.muted {
+    -fx-text-fill: #98A0AA;
+}
+
+/* Controls row */
+.controls-row .text-field {
+    -fx-background-color: #151a22;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 8 12 8 12;
+    -fx-text-fill: #ECEFF4;
+}
+
+/* Table header styling */
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+.table-view .column-header, .table-view .column-header .label {
+    -fx-text-fill: #98A0AA;
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+    -fx-alignment: CENTER-LEFT;
+}
+
+/* Table rows */
+.table-row-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 8 12;
+}
+.table-row-cell:filled:selected, .table-row-cell:selected {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, rgba(45,108,223,0.15), rgba(122,57,245,0.06));
+}
+.table-row-cell:hover {
+    -fx-background-color: rgba(255,255,255,0.02);
+}
+
+/* Alternating row colors (subtle) */
+.table-row-cell:even {
+    -fx-background-color: rgba(255,255,255,0.01);
+}
+.table-row-cell:odd {
+    -fx-background-color: transparent;
+}
+
+/* Rank column - monospaced for alignment */
+.table-cell .rank-cell {
+    -fx-font-family: "Roboto Mono", "monospace";
+    -fx-font-weight: 700;
+    -fx-text-fill: #ECEFF4;
+}
+
+/* Player cell - avatar + name */
+.table-cell .player-cell {
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 6 8;
+}
+.player-avatar {
+    -fx-background-radius: 20;
+    -fx-pref-width: 32;
+    -fx-pref-height: 32;
+    -fx-border-radius: 20;
+    -fx-margin-right: 8;
+}
+
+/* Score cell */
+.table-cell .score-cell {
+    -fx-font-weight: 700;
+    -fx-text-fill: #ECEFF4;
+    -fx-alignment: CENTER;
+}
+
+/* Date cell */
+.table-cell .date-cell {
+    -fx-text-fill: #98A0AA;
+    -fx-alignment: CENTER_RIGHT;
+}
+
+/* Pagination */
+.pagination {
+    -fx-page-information-visible: true;
+}
+
+/* Buttons (reuse your app button styles) */
+.button.btn-ghost {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255,255,255,0.06);
+    -fx-border-radius: 8;
+    -fx-text-fill: #ECEFF4;
+    -fx-padding: 8 12;
+}
+.button.icon-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #98A0AA;
+}
+
+/* Placeholder label (table empty) */
+.table-view .placeholder .label {
+    -fx-text-fill: #98A0AA;
+    -fx-font-style: italic;
+}
