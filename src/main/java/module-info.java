@@ -5,5 +5,6 @@ module com.guessing.gamemaster {
 
     opens com.guessing.gamemaster to javafx.fxml;
     opens com.guessing.gamemaster.controllers to javafx.fxml;
+    opens com.guessing.gamemaster.utils to javafx.base;
     exports com.guessing.gamemaster;
 }

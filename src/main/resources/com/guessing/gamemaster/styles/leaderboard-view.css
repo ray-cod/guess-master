@@ -1,0 +1,162 @@
+
+/*Card*/
+.card {
+  /* subtle vertical gradient for the card */
+  -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #0d0f14 0%, #0a0c10 100%);
+  -fx-background-radius: 12;
+  -fx-padding: 28 0 28 0;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.65), 24, 0.3, 0, 6);
+  -fx-alignment: center;
+  -fx-spacing: 18;
+}
+
+/* Backdrop - fills the window and gives vignette */
+.backdrop {
+  -fx-background-color: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
+  -fx-background-image: url("https://res.cloudinary.com/dicqdr7wa/image/upload/f_auto,q_auto,w_1200/v1756832056/black-brick_iwr5bz.jpg");
+  -fx-background-repeat: stretch;
+  -fx-background-size: cover;
+  -fx-background-position: center center;
+}
+
+.combo-box{
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255,255,255,0.06);
+    -fx-border-radius: 8;
+    -fx-padding: 5 0;
+}
+
+.combo-box .list-cell:empty {
+    -fx-text-fill: red; /* non-editable combo prompt text */
+}
+
+/* table Card */
+.card-table {
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #0d0f14 0%, #0a0c10 100%);
+    -fx-background-radius: 12;
+    -fx-padding: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 18, 0.2, 0, 6);
+}
+
+/* Page title */
+.page-title {
+    -fx-text-fill: #ECEFF4;
+    -fx-font-size: 28px;
+    -fx-font-weight: 700;
+}
+
+/* Muted text */
+.muted {
+    -fx-text-fill: #98A0AA;
+}
+
+/* Controls row */
+.controls-row .text-field {
+    -fx-background-color: #151a22;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 8 12 8 12;
+    -fx-text-fill: #ECEFF4;
+}
+
+/* ===Table header styling=== */
+
+/* --- Color palette --- */
+.card-table .table-view {
+    -fx-font-family: "Segoe UI", "Inter", "System";
+    -fx-font-size: 13px;
+    -fx-background-color: transparent;
+}
+
+/* Header background (transparent, elevated) */
+.card-table .table-view .column-header-background {
+    -fx-background-color: rgba(255,255,255,0.02);
+    -fx-padding: 8 12;
+    -fx-border-color: transparent;
+}
+
+/* Column header text */
+.card-table .table-view .column-header .label {
+    -fx-text-fill: #98A0AA;    /* muted */
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 0.6px;
+    -fx-alignment: CENTER-LEFT;
+    -fx-padding: 6 8;
+}
+
+/* Header sort arrow (chevron) color */
+.card-table .table-view .column-header .arrow {
+    -fx-background-color: #98A0AA;
+}
+
+.card-table .table-view .column-header {
+    -fx-background-color: black;
+}
+
+/* Row hover */
+.card-table .table-view .table-row-cell:hover {
+    -fx-background-color: rgba(255,255,255,0.02);
+}
+
+/* Selected row */
+.card-table .table-view .table-row-cell:selected,
+.card-table .table-view .table-row-cell:filled:selected {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%,
+        rgba(45,108,223,0.16) 0%,
+        rgba(122,57,245,0.05) 100%);
+    -fx-effect: dropshadow(gaussian, rgba(45,108,223,0.08), 12, 0.12, 0, 2);
+}
+
+/* Alternating row subtle stripe */
+.card-table .table-view .table-row-cell:even {
+    -fx-background-color: rgba(255,255,255,0.01);
+}
+.card-table .table-view .table-row-cell:odd {
+    -fx-background-color: transparent;
+}
+
+/* Table cell base */
+.card-table .table-view .table-cell {
+    -fx-padding: 8 12;
+    -fx-alignment: CENTER_LEFT;
+    -fx-text-fill: #ECEFF4;
+    -fx-border-color: transparent;
+}
+
+/* Table borders / grid lines subtle */
+.card-table .table-view {
+    -fx-table-cell-border-color: rgba(255,255,255,0.03);
+    -fx-border-color: rgba(255,255,255,0.02);
+    -fx-border-radius: 8;
+}
+
+/* Scrollbar styling (subtle) */
+.card-table .table-view .scroll-bar:vertical .thumb,
+.card-table .table-view .scroll-bar:horizontal .thumb {
+    -fx-background-color: rgba(255,255,255,0.07);
+    -fx-background-radius: 6;
+}
+.card-table .table-view .scroll-bar:vertical .track,
+.card-table .table-view .scroll-bar:horizontal .track {
+    -fx-background-color: transparent;
+}
+
+/* Buttons (reuse your app button styles) */
+.button.btn-ghost {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255,255,255,0.06);
+    -fx-border-radius: 8;
+    -fx-text-fill: #ECEFF4;
+    -fx-padding: 8 12;
+}
+.button.icon-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #98A0AA;
+}
+
+/* Placeholder label (table empty) */
+.table-view .placeholder .label {
+    -fx-text-fill: #98A0AA;
+    -fx-font-style: italic;
+}
