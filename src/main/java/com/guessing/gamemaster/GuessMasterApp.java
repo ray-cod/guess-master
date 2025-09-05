@@ -1,5 +1,6 @@
 package com.guessing.gamemaster;
 
+import com.guessing.gamemaster.config.DatabaseInit;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ public class GuessMasterApp extends Application {
     }
 
     public static void main(String[] args) {
+        DatabaseInit.initialize();
         launch();
     }
 }

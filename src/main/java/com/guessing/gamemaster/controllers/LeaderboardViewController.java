@@ -1,5 +1,6 @@
 package com.guessing.gamemaster.controllers;
 
+import com.guessing.gamemaster.config.DatabaseConfig;
 import com.guessing.gamemaster.utils.PlayerScore;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -13,6 +14,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class LeaderboardViewController implements Initializable {
@@ -89,20 +93,30 @@ public class LeaderboardViewController implements Initializable {
             return cell;
         });
 
-        // Dummy values
-        ObservableList<PlayerScore> dummyData = FXCollections.observableArrayList(
-                new PlayerScore(1, "Alice", 1500, "2025-09-01"),
-                new PlayerScore(2, "Bob", 1200, "2025-08-29"),
-                new PlayerScore(3, "Charlie", 950, "2025-08-28"),
-                new PlayerScore(4, "Diana", 870, "2025-08-27"),
-                new PlayerScore(5, "Evan", 650, "2025-08-25")
-        );
+        // Load player scores
+        ObservableList<PlayerScore> scores = FXCollections.observableArrayList();
 
-        tableView.setItems(dummyData);
+        try (Connection conn = DatabaseConfig.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT rank_num, player_name, score, date FROM scores ORDER BY rank_num ASC;\n")) {
 
-        // Optional: visual niceties
-//        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-//        tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            int rank = 0;
+            while (rs.next()) {
+                rank += 1;
+                String name = rs.getString("player_name");
+                int score = rs.getInt("score");
+                String date = rs.getTimestamp("date").toString();
+                scores.add(new PlayerScore(rank, name, score, date));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        tableView.setItems(scores);
+
+        // visual niceties
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
 }

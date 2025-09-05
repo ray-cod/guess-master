@@ -1,6 +1,7 @@
 module com.guessing.gamemaster {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens com.guessing.gamemaster to javafx.fxml;
