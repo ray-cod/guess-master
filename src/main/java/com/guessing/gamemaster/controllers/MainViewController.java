@@ -4,14 +4,17 @@ import com.guessing.gamemaster.utils.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MainViewController {
+public class MainViewController implements Initializable {
 
     // === Identity row ===
     @FXML private TextField playerNameField;
@@ -43,6 +46,22 @@ public class MainViewController {
     private Stage stage;
     @FXML private AnchorPane mainAnchorPane;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Set spinners values
+        SpinnerValueFactory<Integer> roundValueFactory =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20);
+        SpinnerValueFactory<Integer> attemptValueFactory =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20);
+        roundsSpinner.setValueFactory(roundValueFactory);
+        attemptsSpinner.setValueFactory(attemptValueFactory);
+
+        // Listen to slider value changes
+        rangeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            rangeLabel.setText(Integer.toString(newValue.intValue()));
+        });
+    }
+
     // ===Methods===
     @FXML public void onStartClicked(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/guessing/gamemaster/ui/game-view.fxml"));
@@ -50,8 +69,11 @@ public class MainViewController {
 
         GameViewController gameViewController = loader.getController();
         String username = playerNameField.getText();
+        int range = (int) rangeSlider.getValue();
+        int rounds = roundsSpinner.getValue();
+        int attempts = attemptsSpinner.getValue();
 
-        gameViewController.setDataFromMainView(username);
+        gameViewController.setDataFromMainView(username, rounds, range, attempts);
 
         // Switch to game screen
         SceneManager.switchSceneWithData(event, root);

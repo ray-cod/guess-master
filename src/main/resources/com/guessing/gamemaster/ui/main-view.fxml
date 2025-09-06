@@ -85,16 +85,16 @@
                             </opaqueInsets>
                             <children>
                                 <Label styleClass="option-label" text="Rounds" />
-                                <Spinner fx:id="roundsSpinner" editable="true" prefWidth="120.0" GridPane.columnIndex="1" />
+                                <Spinner fx:id="roundsSpinner" prefWidth="120.0" GridPane.columnIndex="1" />
                                 <Label styleClass="option-label" text="Range" GridPane.rowIndex="1" />
                                 <Label styleClass="option-label" text="Max Attempts" GridPane.rowIndex="2" />
                                 <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="607.0" spacing="12.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                     <children>
-                                        <Slider fx:id="rangeSlider" max="1000.0" min="10.0" value="100.0" />
+                                        <Slider fx:id="rangeSlider" blockIncrement="1.0" max="1000.0" min="10.0" value="100.0" />
                                         <Label fx:id="rangeLabel" styleClass="option-value" text="100" />
                                     </children>
                                 </HBox>
-                                <Spinner fx:id="attemptsSpinner" editable="true" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <Spinner fx:id="attemptsSpinner" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                             </children>
                      <padding>
                         <Insets left="24.0" />
