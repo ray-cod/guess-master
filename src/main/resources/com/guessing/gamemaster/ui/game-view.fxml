@@ -38,7 +38,12 @@
                   </HBox>
                   <VBox alignment="TOP_CENTER" prefHeight="543.0" prefWidth="780.0">
                      <children>
-                        <Label fx:id="instructionLabel" styleClass="instruction" text="Instruction: Guess a number between 1 and 100." wrapText="true" />
+                        <VBox alignment="TOP_CENTER" prefHeight="79.0" prefWidth="676.0" spacing="16.0">
+                           <children>
+                              <Label styleClass="user-label" text="Welcome Raimi!" />
+                              <Label fx:id="instructionLabel" styleClass="instruction" text="Instruction: Guess a number between 1 and 100." wrapText="true" />
+                           </children>
+                        </VBox>
                         <HBox alignment="CENTER" prefHeight="81.0" prefWidth="732.0" spacing="12.0" styleClass="play-row">
                            <children>
                               <TextField fx:id="guessField" prefHeight="44.0" prefWidth="260.0" promptText="Enter your guess..." styleClass="guess-field" HBox.hgrow="ALWAYS">

@@ -8,7 +8,6 @@ public class MainViewController {
 
     // === Identity row ===
     @FXML private TextField playerNameField;
-    @FXML private Button avatarButton;
 
     // === Mode selector ===
     @FXML private ToggleGroup modeToggleGroup;
@@ -30,22 +29,10 @@ public class MainViewController {
     // === Footer ===
     @FXML private Button multiplayerBtn;
     @FXML private Button leaderboardBtn;
-    @FXML private Label versionLabel;
-    @FXML private Button settingsBtn;
     @FXML private Button exitBtn;
 
-    @FXML private Region backdrop; // optional if you plan to style or animate the backdrop
-    @FXML private Region card;
-
-
     // ===Methods===
-    @FXML
-    public void onStartClicked(){
-
-    }
-
-    @FXML
-    public void onAvatarClicked(){
+    @FXML public void onStartClicked(){
 
     }
 
@@ -66,11 +53,6 @@ public class MainViewController {
 
     @FXML
     public void onExitClicked(){
-
-    }
-
-    @FXML
-    public void openSettings(){
 
     }
 
