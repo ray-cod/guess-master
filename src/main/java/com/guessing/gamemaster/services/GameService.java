@@ -2,9 +2,14 @@ package com.guessing.gamemaster.services;
 
 import com.guessing.gamemaster.utils.GuessResult;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class GameService {
 
-    // Checks the validity of the guess
+    public static int generateTargetNumber(int minNumber, int maxNumber) {
+        return ThreadLocalRandom.current().nextInt(minNumber, maxNumber + 1);
+    }
+
     public static GuessResult checkGuess(int guess, int target) {
 
         if (guess == target) {
