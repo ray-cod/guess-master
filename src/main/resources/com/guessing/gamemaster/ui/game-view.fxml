@@ -40,7 +40,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="79.0" prefWidth="676.0" spacing="16.0">
                            <children>
-                              <Label styleClass="user-label" text="Welcome Raimi!" />
+                              <Label fx:id="userLabel" styleClass="user-label" text="Welcome Raimi!" />
                               <Label fx:id="instructionLabel" styleClass="instruction" text="Instruction: Guess a number between 1 and 100." wrapText="true" />
                            </children>
                         </VBox>

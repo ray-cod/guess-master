@@ -1,8 +1,14 @@
 package com.guessing.gamemaster.controllers;
 
+import com.guessing.gamemaster.utils.SceneManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class MainViewController {
 
@@ -31,9 +37,22 @@ public class MainViewController {
     @FXML private Button leaderboardBtn;
     @FXML private Button exitBtn;
 
-    // ===Methods===
-    @FXML public void onStartClicked(){
+    // === screen ===
+    private Parent root;
+    private Stage stage;
 
+    // ===Methods===
+    @FXML public void onStartClicked(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/guessing/gamemaster/ui/game-view.fxml"));
+        root = loader.load();
+
+        GameViewController gameViewController = loader.getController();
+        String username = playerNameField.getText();
+
+        gameViewController.setDataFromMainView(username);
+
+        // Switch to game screen
+        SceneManager.switchSceneWithData(event, root);
     }
 
     @FXML
@@ -52,7 +71,7 @@ public class MainViewController {
     }
 
     @FXML
-    public void onExitClicked(){
+    public void onExitClicked(ActionEvent event){
 
     }
 
