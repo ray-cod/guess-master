@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -40,6 +41,7 @@ public class MainViewController {
     // === screen ===
     private Parent root;
     private Stage stage;
+    @FXML private AnchorPane mainAnchorPane;
 
     // ===Methods===
     @FXML public void onStartClicked(ActionEvent event) throws IOException {
@@ -72,7 +74,15 @@ public class MainViewController {
 
     @FXML
     public void onExitClicked(ActionEvent event){
+        Alert closeAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        closeAlert.setTitle("Exit");
+        closeAlert.setHeaderText("Game Exit");
+        closeAlert.setContentText("Are you sure that you want to leave?");
 
+        if(closeAlert.showAndWait().get() == ButtonType.OK){
+            stage = (Stage) mainAnchorPane.getScene().getWindow();
+            stage.close();
+        }
     }
 
     @FXML
