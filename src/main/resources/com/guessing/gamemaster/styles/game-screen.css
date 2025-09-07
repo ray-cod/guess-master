@@ -73,7 +73,7 @@
 
 .progress-bar {
     -fx-accent: #2D6CDF;
-    -fx-pref-height: 8;
+    -fx-pref-height: 11;
     -fx-background-radius: 6;
     -fx-control-inner-background: rgba(255,255,255,0.05);
 }

@@ -47,27 +47,4 @@ public class GameService {
 
         return score;
     }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int target = generateTargetNumber(1, 100);
-        int guess;
-        GuessResult res;
-
-        System.out.println("=== Guess a number between 1 and 100 ===");
-        while (true){
-            System.out.print("Enter your Guess: ");
-            guess = sc.nextInt();
-
-            res = checkGuess(guess, target);
-
-            if (res.isCorrect()){
-                System.out.println(res.message());
-                break;
-            } else {
-                System.out.println(res.message());
-            }
-        }
-
-    }
 }

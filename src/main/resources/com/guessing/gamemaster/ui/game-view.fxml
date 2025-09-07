@@ -69,8 +69,8 @@
                               <Label fx:id="feedbbackLabel" styleClass="feedback" GridPane.columnIndex="1" />
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <Label fx:id="attemptLabel" styleClass="muted" text="3 / 10" />
-                                    <ProgressBar fx:id="attemptProgress" prefWidth="280.0" progress="0.3">
+                                    <Label fx:id="attemptLabel" styleClass="muted" text="1 / 10" />
+                                    <ProgressBar fx:id="attemptProgress" prefWidth="280.0" progress="0.0">
                                        <HBox.margin>
                                           <Insets left="14.0" />
                                        </HBox.margin>

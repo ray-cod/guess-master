@@ -5,6 +5,7 @@ import com.guessing.gamemaster.utils.GuessResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 
 import java.time.LocalTime;
@@ -19,14 +20,15 @@ public class GameViewController {
     @FXML private TextField guessField;
     @FXML private Label feedbackLabel;
     @FXML private Label scoreLabel;
+    @FXML private ProgressBar attemptProgress;
 
     /*==== Game properties ===*/
     private int target;
     private int guess;
-    private int score = 0;
+    private int score;
     private GuessResult guessResult;
     private int totalAttempts;
-    private int playerAttempts = 0;
+    private int playerAttempts;
     private int rangeLimit;
     private LocalTime playTime = LocalTime.of(0, 0, 50);
 
@@ -63,6 +65,7 @@ public class GameViewController {
 
         scoreLabel.setText("Score: " + score);
         attemptLabel.setText((playerAttempts + 1) + " / " + totalAttempts);
+        attemptProgress.setProgress((double) playerAttempts / totalAttempts);
         guessField.setText("");
     }
 }
