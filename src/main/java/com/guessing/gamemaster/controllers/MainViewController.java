@@ -85,7 +85,7 @@ public class MainViewController implements Initializable {
     }
 
     @FXML
-    public void onExitClicked(ActionEvent event){
+    public void onExitClicked(){
         Alert closeAlert = new Alert(Alert.AlertType.CONFIRMATION);
         closeAlert.setTitle("Exit");
         closeAlert.setHeaderText("Game Exit");

@@ -2,15 +2,16 @@ package com.guessing.gamemaster.controllers;
 
 import com.guessing.gamemaster.services.GameService;
 import com.guessing.gamemaster.utils.GuessResult;
+import com.guessing.gamemaster.utils.SceneManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.time.LocalTime;
 
 public class GameViewController {
@@ -30,6 +31,7 @@ public class GameViewController {
     private int target;
     private int guess;
     private int score;
+    private int rounds;
     private GuessResult guessResult;
     private int totalAttempts;
     private int playerAttempts;
@@ -56,6 +58,7 @@ public class GameViewController {
         roundLabel.setText("Round: 1 / " + rounds);
         instructionLabel.setText("Instruction: Guess a number between 1 and " + range + ".");
         // initialize attempts display
+        this.rounds = rounds;
         this.playerAttempts = 0;
         this.totalAttempts = attempts;
         attemptLabel.setText(playerAttempts + " / " + totalAttempts);
@@ -131,6 +134,42 @@ public class GameViewController {
             feedbackLabel.setText("No more attempts.");
             playTime = LocalTime.ofSecondOfDay(timerStart - remainingSeconds >= 0 ? timerStart - remainingSeconds : timerStart);
             guessField.setDisable(true);
+        }
+    }
+
+    @FXML
+    public void openMainMenu(ActionEvent event) throws IOException {
+        Alert menuAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        menuAlert.setTitle("Main Menu");
+        menuAlert.setHeaderText("Confirmation");
+        menuAlert.setContentText("Do you really want to end the game?");
+
+        if(menuAlert.showAndWait().get() == ButtonType.OK){
+            stopTimer();
+            SceneManager.switchScene(event, "/com/guessing/gamemaster/ui/main-view.fxml");
+        }
+    }
+
+    @FXML
+    public void onNewGameClicked(){
+        Alert menuAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        menuAlert.setTitle("New Game");
+        menuAlert.setHeaderText("Confirmation");
+        menuAlert.setContentText("Do you really want to restart the game?");
+
+        if(menuAlert.showAndWait().get() == ButtonType.OK){
+            // Game reset
+            score = 0;
+            playerAttempts = 0;
+            guessHistory.getItems().clear();
+            remainingSeconds = timerStart;
+            roundLabel.setText("Round: 1 / " + rounds);
+            scoreLabel.setText("Score: " + score);
+            feedbackLabel.setText("");
+            guessField.setText("");
+            attemptProgress.setProgress(0.0);
+            attemptLabel.setText(playerAttempts + " / " + totalAttempts);
+            updateTimerLabel();
         }
     }
 
