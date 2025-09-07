@@ -123,7 +123,7 @@
                             </VBox.margin>
                             <children>
                                 <Button fx:id="multiplayerBtn" mnemonicParsing="false" styleClass="icon-btn" text="Multiplayer" />
-                                <Button fx:id="leaderboardBtn" mnemonicParsing="false" styleClass="icon-btn" text="Leaderboard" />
+                                <Button fx:id="leaderboardBtn" mnemonicParsing="false" onAction="#openLeaderboard" styleClass="icon-btn" text="Leaderboard" />
                                 <Region prefHeight="33.0" prefWidth="70.0" HBox.hgrow="ALWAYS" />
                                 <Label fx:id="versionLabel" styleClass="muted" text="v1.0" />
                                 <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#onExitClicked" styleClass="icon-btn" text="Exit" />

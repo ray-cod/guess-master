@@ -31,16 +31,6 @@ public class MainViewController implements Initializable {
     @FXML private Label rangeLabel;
     @FXML private Spinner<Integer> attemptsSpinner;
 
-    // === Primary action ===
-    @FXML private Button startButton;
-    @FXML private Button demoBtn;
-    @FXML private Button shuffleBtn;
-
-    // === Footer ===
-    @FXML private Button multiplayerBtn;
-    @FXML private Button leaderboardBtn;
-    @FXML private Button exitBtn;
-
     // === screen ===
     private Parent root;
     private Stage stage;
@@ -90,8 +80,8 @@ public class MainViewController implements Initializable {
     }
 
     @FXML
-    public void openLeaderboard(){
-
+    public void openLeaderboard(ActionEvent event) throws IOException {
+        SceneManager.switchScene(event, "/com/guessing/gamemaster/ui/leaderboard-view.fxml");
     }
 
     @FXML
