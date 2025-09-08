@@ -72,8 +72,7 @@ public class GameViewController {
         attemptLabel.setText(playerAttempts + " / " + totalAttempts);
 
         // ==== Setting game properties ===
-//        this.target = GameService.generateTargetNumber(1, range);
-        this.target = 50;
+        this.target = GameService.generateTargetNumber(1, range);
         this.rangeLimit = range;
 
         // setup and start timer
@@ -182,9 +181,11 @@ public class GameViewController {
             scoreLabel.setText("Score: " + score);
             feedbackLabel.setText("");
             guessField.setText("");
+            guessField.setDisable(false);
             attemptProgress.setProgress(0.0);
             attemptLabel.setText(playerAttempts + " / " + totalAttempts);
             updateTimerLabel();
+            startTimer();
         }
     }
 
