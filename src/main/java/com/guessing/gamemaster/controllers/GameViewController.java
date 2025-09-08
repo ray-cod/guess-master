@@ -37,7 +37,7 @@ public class GameViewController {
     private int playerAttempts;
     private int rangeLimit;
 
-    private int timerStart = 180; // 3 minutes (seconds)
+    private int timerStart = 300; // 5 minutes (seconds)
     private int remainingSeconds;  // remaining seconds for the countdown
     private LocalTime playTime = LocalTime.of(0, 0, 50);
 

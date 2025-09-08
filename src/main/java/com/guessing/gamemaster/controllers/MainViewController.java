@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class MainViewController implements Initializable {
 
@@ -70,13 +71,37 @@ public class MainViewController implements Initializable {
     }
 
     @FXML
-    public void onDemoClicked(){
+    public void onDemoClicked(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/guessing/gamemaster/ui/game-view.fxml"));
+        root = loader.load();
 
+        GameViewController gameViewController = loader.getController();
+        String username = "To Demo";
+        int range = 100;
+        int rounds = 1;
+        int attempts = 8;
+
+        gameViewController.setDataFromMainView(username, rounds, range, attempts);
+
+        // Switch to game screen
+        SceneManager.switchSceneWithData(event, root);
     }
 
     @FXML
-    public void onRandomPresetClicked(){
+    public void onRandomPresetClicked(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/guessing/gamemaster/ui/game-view.fxml"));
+        root = loader.load();
 
+        GameViewController gameViewController = loader.getController();
+        String username = playerNameField.getText().isEmpty()? "Player" : playerNameField.getText();
+        int range = ThreadLocalRandom.current().nextInt(10, 1000);
+        int rounds = ThreadLocalRandom.current().nextInt(2, 7);
+        int attempts = ThreadLocalRandom.current().nextInt(5, 15);
+
+        gameViewController.setDataFromMainView(username, rounds, range, attempts);
+
+        // Switch to game screen
+        SceneManager.switchSceneWithData(event, root);
     }
 
     @FXML

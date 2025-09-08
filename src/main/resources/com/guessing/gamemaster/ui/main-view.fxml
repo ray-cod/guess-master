@@ -64,7 +64,6 @@
                                                 <ToggleGroup fx:id="modeToggleGroup" />
                                             </toggleGroup>
                                         </RadioButton>
-                                        <RadioButton fx:id="rbLocal2" mnemonicParsing="false" styleClass="mode-toggle" text="Local 2-Player" toggleGroup="$modeToggleGroup" />
                                         <RadioButton fx:id="rbOnline" mnemonicParsing="false" styleClass="mode-toggle" text="Online Multiplayer" toggleGroup="$modeToggleGroup" />
                                     </children>
                                 </HBox>
@@ -111,8 +110,8 @@
                                 <Button fx:id="startButton" mnemonicParsing="false" onAction="#onStartClicked" prefHeight="48.0" prefWidth="360.0" styleClass="btn-primary" text="Start Game" />
                                 <HBox alignment="CENTER" prefHeight="42.0" prefWidth="732.0" spacing="12.0">
                                     <children>
-                                        <Button fx:id="demoBtn" mnemonicParsing="false" styleClass="btn-ghost" text="Demo" />
-                                        <Button fx:id="shuffleBtn" mnemonicParsing="false" styleClass="btn-ghost" text="Random Preset" />
+                                        <Button fx:id="demoBtn" mnemonicParsing="false" onAction="#onDemoClicked" styleClass="btn-ghost" text="Demo" />
+                                        <Button fx:id="shuffleBtn" mnemonicParsing="false" onAction="#onRandomPresetClicked" styleClass="btn-ghost" text="Random Preset" />
                                     </children>
                                 </HBox>
                             </children>
