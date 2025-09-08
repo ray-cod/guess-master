@@ -145,14 +145,25 @@
 /* Buttons (reuse your app button styles) */
 .button.btn-ghost {
     -fx-background-color: transparent;
-    -fx-border-color: rgba(255,255,255,0.06);
-    -fx-border-radius: 8;
-    -fx-text-fill: #ECEFF4;
-    -fx-padding: 8 12;
+      -fx-border-color: rgba(255, 255, 255, 0.06);
+      -fx-border-radius: 8;
+      -fx-text-fill: #eceff4;
+      -fx-padding: 8 12 8 12;
+      -fx-cursor: hand;
 }
+.button.btn-ghost:hover {
+  -fx-background-color: rgba(255, 255, 255, 0.03);
+}
+
 .button.icon-btn {
     -fx-background-color: transparent;
-    -fx-text-fill: #98A0AA;
+      -fx-text-fill: #98a0aa;
+      -fx-padding: 6 10 6 10;
+      -fx-cursor: hand;
+}
+.button.icon-btn:hover {
+  -fx-text-fill: #eceff4;
+  -fx-background-color: rgba(255, 255, 255, 0.02);
 }
 
 /* Placeholder label (table empty) */

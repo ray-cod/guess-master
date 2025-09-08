@@ -58,7 +58,7 @@
                         <Button fx:id="refreshBtn" mnemonicParsing="false" prefHeight="34.0" prefWidth="152.0" styleClass="btn-ghost" text="Refresh" />
                         <Button fx:id="exportBtn" mnemonicParsing="false" prefHeight="34.0" prefWidth="174.0" styleClass="btn-ghost" text="Export CSV" />
                         <Region prefHeight="100.0" prefWidth="116.0" HBox.hgrow="ALWAYS" />
-                        <Label prefHeight="16.0" prefWidth="174.0" text="Showing 0 of 0">
+                        <Label prefHeight="16.0" prefWidth="139.0" text="Showing 0">
                            <styleClass>
                               <String fx:value="muted" />
                               <String fx:value="small" />
