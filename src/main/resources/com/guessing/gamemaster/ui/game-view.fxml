@@ -17,7 +17,7 @@
 
 <AnchorPane prefHeight="640.0" prefWidth="1000.0" stylesheets="@../styles/game-screen.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.guessing.gamemaster.controllers.GameViewController">
    <children>
-      <StackPane layoutX="262.0" layoutY="236.0" prefHeight="640.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <StackPane fx:id="rootStack" layoutX="262.0" layoutY="236.0" prefHeight="640.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Region fx:id="backdrop" prefHeight="200.0" prefWidth="200.0" styleClass="backdrop" />
             <VBox fx:id="card" alignment="TOP_CENTER" maxWidth="780.0" prefHeight="200.0" prefWidth="720.0" spacing="16.0" styleClass="card">

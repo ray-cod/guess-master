@@ -7,8 +7,10 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -43,8 +45,14 @@ public class GameViewController {
 
     private Timeline timeline;
 
+    // === Dialog ===
+    @FXML private StackPane rootStack;
+    private Node postRoundDialogNode;
+    private PostRoundDialogController postRoundController;
+
     @FXML
     public void initialize() {
+        loadPostRoundDialog();
         guessHistory.setPlaceholder(new Label("No guesses yet..."));
         // default UI state
         scoreLabel.setText("Score: " + score);
@@ -64,7 +72,8 @@ public class GameViewController {
         attemptLabel.setText(playerAttempts + " / " + totalAttempts);
 
         // ==== Setting game properties ===
-        this.target = GameService.generateTargetNumber(1, range);
+//        this.target = GameService.generateTargetNumber(1, range);
+        this.target = 50;
         this.rangeLimit = range;
 
         // setup and start timer
@@ -106,7 +115,7 @@ public class GameViewController {
             playTime = LocalTime.ofSecondOfDay(secondsElapsed);
 
             // stop timer (round finished)
-            if (timeline != null) timeline.stop();
+            stopTimer();
 
             score += GameService.calculateScore(playerAttempts, playTime, rangeLimit);
             feedbackLabel.setStyle("-fx-text-fill: green;");
@@ -115,6 +124,12 @@ public class GameViewController {
             // disable further guesses for this round
             guessField.setDisable(true);
 
+            PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
+                    true, guessResult.message(), "Great job! Fast and accurate.",
+                    score, score, playerAttempts, totalAttempts, formatTime(secondsElapsed),
+                    "Breakdown Text", true
+            );
+            onRoundEnded(gameResults);
         } else {
             score -= 2;
             feedbackLabel.setStyle("-fx-text-fill: red;");
@@ -223,5 +238,27 @@ public class GameViewController {
         if (timeline != null) {
             timeline.stop();
         }
+    }
+
+    private void loadPostRoundDialog() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/guessing/gamemaster/ui/post-round-dialog.fxml"));
+            postRoundDialogNode = loader.load();                    // whole StackPane from FXML
+            postRoundController = loader.getController();           // controller instance
+            postRoundDialogNode.setVisible(false);                 // hidden initially
+            // ensure it sits above everything
+            rootStack.getChildren().add(postRoundDialogNode);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // when a round ends:
+    private void onRoundEnded(PostRoundDialogController.Result result) {
+        // populate and show dialog
+        postRoundController.show(result);       // fills labels, sets icon, animations
+        postRoundDialogNode.setVisible(true);
+        postRoundDialogNode.toFront();
+        postRoundDialogNode.requestFocus();     // capture key events
     }
 }

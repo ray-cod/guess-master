@@ -53,10 +53,18 @@
     -fx-padding: 8 16;
     -fx-cursor: hand;
 }
+.button.btn-ghost:hover {
+  -fx-background-color: rgba(255, 255, 255, 0.03);
+}
+
 .icon-btn {
     -fx-background-color: transparent;
     -fx-text-fill: #98A0AA;
     -fx-cursor: hand;
+}
+.button.icon-btn:hover {
+  -fx-text-fill: #eceff4;
+  -fx-background-color: rgba(255, 255, 255, 0.02);
 }
 
 .icon-close {
