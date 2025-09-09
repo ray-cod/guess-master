@@ -46,6 +46,7 @@ public class GameViewController {
     private Timeline timeline;
 
     // === Dialog ===
+    private boolean isWin = false;
     @FXML private StackPane rootStack;
     private Node postRoundDialogNode;
     private PostRoundDialogController postRoundController;
@@ -83,6 +84,13 @@ public class GameViewController {
 
     @FXML
     public void onGuessClicked() {
+        // check if time already expired or input disabled
+        if (guessField.isDisabled() || remainingSeconds <= 0) {
+            feedbackLabel.setStyle("-fx-text-fill: red;");
+            feedbackLabel.setText("Can't guess now — time's up.");
+            return;
+        }
+
         // validate input
         String text = guessField.getText();
         int parsed;
@@ -92,13 +100,6 @@ public class GameViewController {
             feedbackLabel.setStyle("-fx-text-fill: red;");
             feedbackLabel.setText("Please enter a valid number.");
             guessField.setText("");
-            return;
-        }
-
-        // check if time already expired or input disabled
-        if (guessField.isDisabled() || remainingSeconds <= 0) {
-            feedbackLabel.setStyle("-fx-text-fill: red;");
-            feedbackLabel.setText("Can't guess now — time's up or input disabled.");
             return;
         }
 
@@ -123,8 +124,10 @@ public class GameViewController {
             // disable further guesses for this round
             guessField.setDisable(true);
 
+            // Display result dialog
+            isWin = true;
             PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
-                    true, guessResult.message(), "Great job! Fast and accurate.",
+                    isWin, guessResult.message(), "Great job! Fast and accurate.",
                     score, score, playerAttempts, totalAttempts, formatTime(secondsElapsed),
                     "Breakdown Text", true
             );
@@ -143,11 +146,20 @@ public class GameViewController {
 
         // if attempts exhausted, end round
         if (playerAttempts >= totalAttempts) {
-            if (timeline != null) timeline.stop();
+            stopTimer();
             feedbackLabel.setStyle("-fx-text-fill: red;");
             feedbackLabel.setText("No more attempts.");
             playTime = LocalTime.ofSecondOfDay(timerStart - remainingSeconds >= 0 ? timerStart - remainingSeconds : timerStart);
             guessField.setDisable(true);
+
+            if (!isWin){
+                PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
+                        isWin, "Game Over", "You ran out of attempts.",
+                        score, score, playerAttempts, totalAttempts, formatTime(timerStart - remainingSeconds),
+                        "Breakdown Text", true
+                );
+                onRoundEnded(gameResults);
+            }
         }
     }
 
@@ -233,6 +245,13 @@ public class GameViewController {
         playTime = LocalTime.ofSecondOfDay(timerStart);
         // disable further input for this round
         guessField.setDisable(true);
+
+        PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
+                isWin, "Game Over", "You ran out of time.",
+                score, score, playerAttempts, totalAttempts, formatTime(timerStart - remainingSeconds),
+                "Breakdown Text", true
+        );
+        onRoundEnded(gameResults);
     }
 
     public void stopTimer() {
