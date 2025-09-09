@@ -20,7 +20,7 @@
             <HBox alignment="TOP_RIGHT" prefHeight="52.0" prefWidth="716.0">
                <children>
                   <Region prefHeight="81.0" prefWidth="691.0" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="closeButton" mnemonicParsing="false" styleClass="icon-close" text="x" />
+                  <Button fx:id="closeButton" mnemonicParsing="false" onAction="#onCloseDialog" styleClass="icon-close" text="x" />
                </children>
             </HBox>
             <VBox alignment="CENTER" prefHeight="145.0" prefWidth="716.0" spacing="8.0">
@@ -78,14 +78,14 @@
                <children>
                   <Button fx:id="nextButton" mnemonicParsing="false" styleClass="btn-primary" text="Next Round" />
                   <Button fx:id="replayButton" mnemonicParsing="false" styleClass="btn-ghost" text="Replay Round" />
-                  <Button fx:id="leaderboardButton" mnemonicParsing="false" styleClass="btn-ghost" text="Leaderboard" />
+                  <Button fx:id="leaderboardButton" mnemonicParsing="false" onAction="#openLeaderboard" styleClass="btn-ghost" text="Leaderboard" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="72.0" prefWidth="716.0" spacing="8.0">
                <children>
                   <Button fx:id="shareButton" mnemonicParsing="false" styleClass="icon-btn" text="Share" />
                   <Region prefHeight="84.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="mainMenuButton" mnemonicParsing="false" styleClass="icon-btn" text="Main Menu" />
+                  <Button fx:id="mainMenuButton" mnemonicParsing="false" onAction="#openMainMenu" styleClass="icon-btn" text="Main Menu" />
                </children>
             </HBox>
             <Label fx:id="footerNote" text="Press Enter to continue or Esc to close">

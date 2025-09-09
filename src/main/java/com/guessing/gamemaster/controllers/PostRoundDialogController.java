@@ -1,6 +1,8 @@
 package com.guessing.gamemaster.controllers;
 
+import com.guessing.gamemaster.utils.SceneManager;
 import javafx.animation.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -14,6 +16,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Objects;
@@ -23,8 +26,8 @@ import java.util.function.Consumer;
 public class PostRoundDialogController implements Initializable {
 
     // Root + backdrop
-    @FXML private StackPane dialogRoot;      // root StackPane from post-round FXML
-    @FXML private Region backdrop;        // full-screen Rectangle that blocks clicks
+    @FXML private StackPane dialogRoot;
+    @FXML private Region backdrop;
 
     // Card content
     @FXML private ImageView resultIcon;
@@ -41,36 +44,16 @@ public class PostRoundDialogController implements Initializable {
 
     // Action buttons
     @FXML private Button nextButton;
-    @FXML private Button replayButton;
-    @FXML private Button leaderboardButton;
-    @FXML private Button shareButton;
-    @FXML private Button mainMenuButton;
-    @FXML private Button closeButton;
-
-    // Callbacks assigned by the game controller
-    private Runnable onNext = null;
-    private Runnable onReplay = null;
-    private Runnable onMainMenu = null;
-    private Consumer<Result> onShare = null; // --> share handler
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // dialog hidden by default; ensure it doesn't block when invisible
+        // dialog hidden by default
         if (dialogRoot != null) dialogRoot.setVisible(false);
 
         // consume backdrop clicks so underlying UI doesn't get them
         if (backdrop != null) {
             backdrop.setOnMouseClicked(evt -> evt.consume());
         }
-
-        // wire simple button handlers to call external callbacks (if provided)
-        if (nextButton != null) nextButton.setOnAction(e -> { if (onNext != null) onNext.run(); close(); });
-        if (replayButton != null) replayButton.setOnAction(e -> { if (onReplay != null) onReplay.run(); close(); });
-        if (mainMenuButton != null) mainMenuButton.setOnAction(e -> { if (onMainMenu != null) onMainMenu.run(); close(); });
-        if (closeButton != null) closeButton.setOnAction(e -> close());
-        if (shareButton != null) shareButton.setOnAction(e -> {
-            if (onShare != null) onShare.accept(lastShownResult);
-        });
 
         // keyboard handling: Enter -> Next (if enabled), Esc -> close
         if (dialogRoot != null) {
@@ -114,7 +97,7 @@ public class PostRoundDialogController implements Initializable {
 
         // set icon (trophy for win, sad for lose) - try to load resources; fallback is no image
         if (resultIcon != null) {
-            Image icon = loadIcon(result.isWin ? "/com/guessing/gamemaster/images/trophy.png" : "/com/guessing/gamemaster/images/sad.png");
+            Image icon = loadIcon(result.isWin ? "/com/guessing/gamemaster/images/trophy.png" : "/com/guessing/gamemaster/images/lost.png");
             resultIcon.setImage(icon);
         }
 
@@ -182,18 +165,6 @@ public class PostRoundDialogController implements Initializable {
         hide.play();
     }
 
-    /** Set callbacks for dialog actions. */
-    public void setHandlers(Runnable onNext, Runnable onReplay, Runnable onMainMenu) {
-        this.onNext = onNext;
-        this.onReplay = onReplay;
-        this.onMainMenu = onMainMenu;
-    }
-
-    /** --> set a handler to process share requests (receives the shown Result). */
-    public void setShareHandler(Consumer<Result> shareHandler) {
-        this.onShare = shareHandler;
-    }
-
     // simple icon loader with safe fallback (null if not found)
     private Image loadIcon(String resourcePath) {
         try (InputStream is = getClass().getResourceAsStream(resourcePath)) {
@@ -204,12 +175,18 @@ public class PostRoundDialogController implements Initializable {
         }
     }
 
-    // FXML button handlers (if you wired onAction in FXML instead of programmatically)
-    @FXML private void onNextRound() { if (onNext != null) onNext.run(); close(); }
-    @FXML private void onReplay() { if (onReplay != null) onReplay.run(); close(); }
-    @FXML private void onLeaderboard() { if (onMainMenu != null) onMainMenu.run(); close(); }
-    @FXML private void onShare() { if (onShare != null) onShare.accept(lastShownResult); }
-    @FXML private void onClose() { close(); }
+    // FXML button handlers
+    @FXML private void openLeaderboard(ActionEvent event) throws IOException {
+        SceneManager.switchScene(event, "/com/guessing/gamemaster/ui/leaderboard-view.fxml");
+    }
+
+    @FXML private void openMainMenu(ActionEvent event) throws IOException {
+        SceneManager.switchScene(event, "/com/guessing/gamemaster/ui/main-view.fxml");
+    }
+
+    @FXML private void onCloseDialog(){
+        close();
+    }
 
     /**
      * Immutable result object used to populate the dialog.
