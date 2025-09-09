@@ -33,7 +33,9 @@ public class GameViewController {
     private int target;
     private int guess;
     private int score;
+    private int totalScore;
     private int rounds;
+    private int currentRound = 1;
     private GuessResult guessResult;
     private int totalAttempts;
     private int playerAttempts;
@@ -64,7 +66,7 @@ public class GameViewController {
 
     public void setDataFromMainView(String username, int rounds, int range, int attempts){
         userLabel.setText("Welcome " + username + "!");
-        roundLabel.setText("Round: 1 / " + rounds);
+        roundLabel.setText("Round: " + currentRound + " / " + rounds);
         instructionLabel.setText("Instruction: Guess a number between 1 and " + range + ".");
         // initialize attempts display
         this.rounds = rounds;
@@ -126,9 +128,10 @@ public class GameViewController {
 
             // Display result dialog
             isWin = true;
+            totalScore += score;
             PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
                     isWin, guessResult.message(), "Great job! Fast and accurate.",
-                    score, score, playerAttempts, totalAttempts, formatTime(secondsElapsed),
+                    score, totalScore, playerAttempts, totalAttempts, formatTime(secondsElapsed),
                     "Breakdown Text", true
             );
             onRoundEnded(gameResults);
@@ -153,9 +156,10 @@ public class GameViewController {
             guessField.setDisable(true);
 
             if (!isWin){
+                totalScore += score;
                 PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
                         isWin, "Game Over", "You ran out of attempts.",
-                        score, score, playerAttempts, totalAttempts, formatTime(timerStart - remainingSeconds),
+                        score, totalScore, playerAttempts, totalAttempts, formatTime(timerStart - remainingSeconds),
                         "Breakdown Text", true
                 );
                 onRoundEnded(gameResults);
@@ -184,21 +188,26 @@ public class GameViewController {
         menuAlert.setContentText("Do you really want to restart the game?");
 
         if(menuAlert.showAndWait().get() == ButtonType.OK){
-            // Game reset
-            score = 0;
-            playerAttempts = 0;
-            guessHistory.getItems().clear();
-            remainingSeconds = timerStart;
-            roundLabel.setText("Round: 1 / " + rounds);
-            scoreLabel.setText("Score: " + score);
-            feedbackLabel.setText("");
-            guessField.setText("");
-            guessField.setDisable(false);
-            attemptProgress.setProgress(0.0);
-            attemptLabel.setText(playerAttempts + " / " + totalAttempts);
-            updateTimerLabel();
-            startTimer();
+            setNewGame();
         }
+    }
+
+    public void setNewGame(){
+        // Game reset
+        score = 0;
+        playerAttempts = 0;
+        target = GameService.generateTargetNumber(1, rangeLimit);
+        guessHistory.getItems().clear();
+        remainingSeconds = timerStart;
+        roundLabel.setText("Round: " + currentRound + " / " + rounds);
+        scoreLabel.setText("Score: " + score);
+        feedbackLabel.setText("");
+        guessField.setText("");
+        guessField.setDisable(false);
+        attemptProgress.setProgress(0.0);
+        attemptLabel.setText(playerAttempts + " / " + totalAttempts);
+        updateTimerLabel();
+        startTimer();
     }
 
     private void startTimer() {
@@ -246,9 +255,10 @@ public class GameViewController {
         // disable further input for this round
         guessField.setDisable(true);
 
+        totalScore += score;
         PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
                 isWin, "Game Over", "You ran out of time.",
-                score, score, playerAttempts, totalAttempts, formatTime(timerStart - remainingSeconds),
+                score, totalScore, playerAttempts, totalAttempts, formatTime(timerStart - remainingSeconds),
                 "Breakdown Text", true
         );
         onRoundEnded(gameResults);
@@ -266,6 +276,8 @@ public class GameViewController {
             postRoundDialogNode = loader.load();                    // whole StackPane from FXML
             postRoundController = loader.getController();           // controller instance
             postRoundDialogNode.setVisible(false);                 // hidden initially
+            //Initialize game controller instance
+            postRoundController.setGameViewController(this);
             // ensure it sits above everything
             rootStack.getChildren().add(postRoundDialogNode);
         } catch (IOException e) {
@@ -280,5 +292,9 @@ public class GameViewController {
         postRoundDialogNode.setVisible(true);
         postRoundDialogNode.toFront();
         postRoundDialogNode.requestFocus();     // capture key events
+    }
+
+    public void updateCurrentRound(int increment) {
+        this.currentRound += increment;
     }
 }

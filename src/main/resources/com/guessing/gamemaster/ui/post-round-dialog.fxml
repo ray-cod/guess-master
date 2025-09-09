@@ -76,7 +76,7 @@
             </TitledPane>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="12.0">
                <children>
-                  <Button fx:id="nextButton" mnemonicParsing="false" styleClass="btn-primary" text="Next Round" />
+                  <Button fx:id="nextButton" mnemonicParsing="false" onAction="#onNextRound" styleClass="btn-primary" text="Next Round" />
                   <Button fx:id="replayButton" mnemonicParsing="false" styleClass="btn-ghost" text="Replay Round" />
                   <Button fx:id="leaderboardButton" mnemonicParsing="false" onAction="#openLeaderboard" styleClass="btn-ghost" text="Leaderboard" />
                </children>

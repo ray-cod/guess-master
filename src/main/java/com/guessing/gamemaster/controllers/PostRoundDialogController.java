@@ -4,6 +4,7 @@ import com.guessing.gamemaster.utils.SceneManager;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -44,6 +45,9 @@ public class PostRoundDialogController implements Initializable {
 
     // Action buttons
     @FXML private Button nextButton;
+
+    // game controller
+    private GameViewController gameViewController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -186,6 +190,18 @@ public class PostRoundDialogController implements Initializable {
 
     @FXML private void onCloseDialog(){
         close();
+    }
+
+    @FXML private void onNextRound() throws IOException {
+        if (gameViewController != null) {
+            gameViewController.updateCurrentRound(1);
+            gameViewController.setNewGame();
+            close();
+        }
+    }
+
+    public void setGameViewController(GameViewController controller) {
+        this.gameViewController = controller;
     }
 
     /**
