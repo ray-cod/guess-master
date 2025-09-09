@@ -158,7 +158,6 @@ java --module-path /path/to/javafx-sdk/lib --add-modules javafx.controls,javafx.
 
 ## ✍️ About / Contact
 
-Your Name — *Full-stack Java developer / UI enthusiast*
-
+* Developer: Raimi Dikamona Lassissi
 * GitHub: `https://github.com/ray-cod/guess-master.git`
 * Email: `rdikamona9@gmail.com`
