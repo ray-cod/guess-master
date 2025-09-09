@@ -1,7 +1,13 @@
 # Guess Master — Desktop Number Guessing Game 🎯
 
-**A polished, modern JavaFX desktop game — ideal for portfolio demos.**
+**A polished, modern JavaFX desktop game.**
 Guess Master is a small-but-complete desktop project that demonstrates clean UI design, stateful game logic, score/leaderboard persistence, and extendable architecture for multiplayer and online features.
+
+---
+
+## 🎮 Quick demo (Project Images)
+
+> ![screenshot-placeholder](docs/ui-mockups/main-screen.png)
 
 ---
 
@@ -13,12 +19,6 @@ Guess Master is a small-but-complete desktop project that demonstrates clean UI 
 * Leaderboard with pagination, search & export.
 * Clean separation: `controllers`, `services`, `models`, `utils`.
 * Easily packaged for distribution (Maven + JavaFX plugin), ready for screenshots/video in a portfolio.
-
----
-
-## 🎮 Quick demo (Project Images)
-
-> ![screenshot-placeholder](docs/ui-mockups/main-screen.png)
 
 ---
 
