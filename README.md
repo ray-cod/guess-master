@@ -7,7 +7,7 @@ Guess Master is a small-but-complete desktop project that demonstrates clean UI 
 
 ## 🎮 Quick demo (Project Images)
 
-> ![screenshot-placeholder](docs/ui-mockups/main-screen.png)
+> ![raimi dikamona lassissi - Guess Master screenshot](docs/ui-mockups/main-screen.png)
 
 ---
 
