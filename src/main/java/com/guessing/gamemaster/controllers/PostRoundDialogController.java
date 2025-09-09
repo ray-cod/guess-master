@@ -96,7 +96,6 @@ public class PostRoundDialogController implements Initializable {
         // set which controls are available
         if (nextButton != null) {
             nextButton.setDisable(!result.hasNextRound);
-            nextButton.setText(result.hasNextRound ? "Next Round" : "Summary");
         }
 
         // set icon (trophy for win, sad for lose) - try to load resources; fallback is no image

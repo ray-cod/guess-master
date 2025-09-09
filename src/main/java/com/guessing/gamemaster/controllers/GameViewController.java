@@ -1,7 +1,9 @@
 package com.guessing.gamemaster.controllers;
 
+import com.guessing.gamemaster.config.DatabaseConfig;
 import com.guessing.gamemaster.services.GameService;
 import com.guessing.gamemaster.utils.GuessResult;
+import com.guessing.gamemaster.utils.PlayerScore;
 import com.guessing.gamemaster.utils.SceneManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,6 +16,10 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.LocalTime;
 
 public class GameViewController {
@@ -40,6 +46,7 @@ public class GameViewController {
     private int totalAttempts;
     private int playerAttempts;
     private int rangeLimit;
+    private String playerName;
 
     private int timerStart = 300; // 5 minutes (seconds)
     private int remainingSeconds;  // remaining seconds for the countdown
@@ -77,6 +84,9 @@ public class GameViewController {
         // ==== Setting game properties ===
         this.target = GameService.generateTargetNumber(1, range);
         this.rangeLimit = range;
+
+        // setting player Identity
+        this.playerName = username;
 
         // setup and start timer
         this.remainingSeconds = timerStart;
@@ -127,14 +137,18 @@ public class GameViewController {
             guessField.setDisable(true);
 
             // Display result dialog
-            isWin = true;
-            totalScore += score;
-            PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
-                    isWin, guessResult.message(), "Great job! Fast and accurate.",
-                    score, totalScore, playerAttempts, totalAttempts, formatTime(secondsElapsed),
-                    "Breakdown Text", true
-            );
-            onRoundEnded(gameResults);
+            if(rounds > currentRound){
+                isWin = true;
+                totalScore += score;
+                PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
+                        isWin, guessResult.message(), "Great job! Fast and accurate.",
+                        score, totalScore, playerAttempts, totalAttempts, formatTime(secondsElapsed),
+                        "Breakdown Text", true
+                );
+                onRoundEnded(gameResults);
+            } else {
+                onEndGame();
+            }
         } else {
             score -= 2;
             feedbackLabel.setStyle("-fx-text-fill: red;");
@@ -156,13 +170,17 @@ public class GameViewController {
             guessField.setDisable(true);
 
             if (!isWin){
-                totalScore += score;
-                PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
-                        isWin, "Game Over", "You ran out of attempts.",
-                        score, totalScore, playerAttempts, totalAttempts, formatTime(timerStart - remainingSeconds),
-                        "Breakdown Text", true
-                );
-                onRoundEnded(gameResults);
+                if(rounds > currentRound){
+                    totalScore += score;
+                    PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
+                            isWin, "Game Over", "You ran out of attempts.",
+                            score, totalScore, playerAttempts, totalAttempts, formatTime(timerStart - remainingSeconds),
+                            "Breakdown Text", true
+                    );
+                    onRoundEnded(gameResults);
+                } else {
+                    onEndGame();
+                }
             }
         }
     }
@@ -255,13 +273,17 @@ public class GameViewController {
         // disable further input for this round
         guessField.setDisable(true);
 
-        totalScore += score;
-        PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
-                isWin, "Game Over", "You ran out of time.",
-                score, totalScore, playerAttempts, totalAttempts, formatTime(timerStart - remainingSeconds),
-                "Breakdown Text", true
-        );
-        onRoundEnded(gameResults);
+        if(rounds > currentRound){
+            totalScore += score;
+            PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
+                    isWin, "Game Over", "You ran out of time.",
+                    score, totalScore, playerAttempts, totalAttempts, formatTime(timerStart - remainingSeconds),
+                    "Breakdown Text", true
+            );
+            onRoundEnded(gameResults);
+        } else {
+            onEndGame();
+        }
     }
 
     public void stopTimer() {
@@ -296,5 +318,28 @@ public class GameViewController {
 
     public void updateCurrentRound(int increment) {
         this.currentRound += increment;
+    }
+
+    public void onEndGame(){
+        String sql = "INSERT INTO scores(player_name, score) VALUES (?, ?)";
+
+        try (Connection conn = DatabaseConfig.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            totalScore += score;
+            // Add player to leaderboard
+            pstmt.setString(1, playerName);
+            pstmt.setInt(2, totalScore);
+            pstmt.executeUpdate();
+
+            isWin = true;
+            PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
+                    isWin, "End Of Rounds!", "Congratulations! Check the leaderboard to know your ranking",
+                    score, totalScore, playerAttempts, totalAttempts, formatTime(timerStart - remainingSeconds),
+                    "Breakdown Text", false
+            );
+            onRoundEnded(gameResults);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

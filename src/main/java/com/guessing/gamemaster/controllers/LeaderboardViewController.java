@@ -2,10 +2,12 @@ package com.guessing.gamemaster.controllers;
 
 import com.guessing.gamemaster.config.DatabaseConfig;
 import com.guessing.gamemaster.utils.PlayerScore;
+import com.guessing.gamemaster.utils.SceneManager;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -13,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -98,7 +101,7 @@ public class LeaderboardViewController implements Initializable {
 
         try (Connection conn = DatabaseConfig.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT rank_num, player_name, score, date FROM scores ORDER BY rank_num ASC;\n")) {
+             ResultSet rs = stmt.executeQuery("SELECT player_name, score, date FROM scores ORDER BY score DESC;\n")) {
 
             int rank = 0;
             while (rs.next()) {
@@ -117,6 +120,10 @@ public class LeaderboardViewController implements Initializable {
         // visual niceties
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    }
+
+    @FXML public void openMainMenu(ActionEvent event) throws IOException {
+        SceneManager.switchScene(event, "/com/guessing/gamemaster/ui/main-view.fxml");
     }
 
 }
