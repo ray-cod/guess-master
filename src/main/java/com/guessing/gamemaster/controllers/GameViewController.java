@@ -317,6 +317,14 @@ public class GameViewController {
         this.currentRound += increment;
     }
 
+    public void updateTotalScore(int score) {
+        this.totalScore -= totalScore;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
     public void onEndGame(){
         String sql = "INSERT INTO scores(player_name, score) VALUES (?, ?)";
 

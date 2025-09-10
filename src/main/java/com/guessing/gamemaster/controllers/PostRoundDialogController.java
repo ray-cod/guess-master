@@ -189,9 +189,17 @@ public class PostRoundDialogController implements Initializable {
         close();
     }
 
-    @FXML private void onNextRound() throws IOException {
+    @FXML private void onNextRound() {
         if (gameViewController != null) {
             gameViewController.updateCurrentRound(1);
+            gameViewController.setNewGame();
+            close();
+        }
+    }
+
+    @FXML private void onReplayRound(){
+        if(gameViewController != null){
+            gameViewController.updateTotalScore(gameViewController.getScore());
             gameViewController.setNewGame();
             close();
         }
@@ -232,15 +240,6 @@ public class PostRoundDialogController implements Initializable {
             this.timeString = timeString;
             this.breakdownText = breakdownText;
             this.hasNextRound = hasNextRound;
-        }
-
-        // convenience builders
-        public static Result win(int points, int totalScore, int attempts, int maxAttempts, String timeString, String breakdown, boolean hasNext) {
-            return new Result(true, "Correct — You Win!", "Nice work!", points, totalScore, attempts, maxAttempts, timeString, breakdown, hasNext);
-        }
-
-        public static Result loss(int points, int totalScore, int attempts, int maxAttempts, String timeString, String breakdown, boolean hasNext) {
-            return new Result(false, "Round Over", "Out of attempts", points, totalScore, attempts, maxAttempts, timeString, breakdown, hasNext);
         }
     }
 }

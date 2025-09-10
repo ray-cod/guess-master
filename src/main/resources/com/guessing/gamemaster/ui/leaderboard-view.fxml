@@ -47,12 +47,12 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="77.0" prefWidth="780.0" spacing="12.0" styleClass="controls-row">
                      <children>
-                        <TextField fx:id="searchField" prefWidth="300.0" promptText="Search player name..." />
-                        <ComboBox fx:id="timeFilter" prefHeight="24.0" prefWidth="204.0" promptText="Filter time..." />
-                        <Button fx:id="refreshBtn" mnemonicParsing="false" prefHeight="34.0" prefWidth="152.0" styleClass="btn-ghost" text="Refresh" />
-                        <Button fx:id="exportBtn" mnemonicParsing="false" prefHeight="34.0" prefWidth="174.0" styleClass="btn-ghost" text="Export CSV" />
+                        <TextField fx:id="nameSearchField" onAction="#onNameSearch" prefWidth="300.0" promptText="Search player name..." />
+                        <ComboBox fx:id="timeFilter" onAction="#onTimeFilter" prefHeight="24.0" prefWidth="204.0" promptText="Filter time..." />
+                        <Button fx:id="refreshBtn" mnemonicParsing="false" onAction="#onRefresh" prefHeight="34.0" prefWidth="152.0" styleClass="btn-ghost" text="Refresh" />
+                        <Button fx:id="exportBtn" mnemonicParsing="false" onAction="#onExport" prefHeight="34.0" prefWidth="174.0" styleClass="btn-ghost" text="Export CSV" />
                         <Region prefHeight="100.0" prefWidth="116.0" HBox.hgrow="ALWAYS" />
-                        <Label prefHeight="16.0" prefWidth="139.0" text="Showing 1">
+                        <Label fx:id="leaderCountLabel" prefHeight="16.0" prefWidth="139.0" text="Showing 1">
                            <styleClass>
                               <String fx:value="muted" />
                               <String fx:value="small" />
