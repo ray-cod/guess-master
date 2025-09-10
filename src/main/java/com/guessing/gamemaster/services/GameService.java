@@ -3,7 +3,6 @@ package com.guessing.gamemaster.services;
 import com.guessing.gamemaster.utils.GuessResult;
 
 import java.time.LocalTime;
-import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GameService {

@@ -3,7 +3,6 @@ package com.guessing.gamemaster.controllers;
 import com.guessing.gamemaster.config.DatabaseConfig;
 import com.guessing.gamemaster.services.GameService;
 import com.guessing.gamemaster.utils.GuessResult;
-import com.guessing.gamemaster.utils.PlayerScore;
 import com.guessing.gamemaster.utils.SceneManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -18,8 +17,6 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.time.LocalTime;
 
 public class GameViewController {
