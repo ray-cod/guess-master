@@ -140,7 +140,7 @@ public class GameViewController {
                 PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
                         isWin, guessResult.message(), "Great job! Fast and accurate.",
                         score, totalScore, playerAttempts, totalAttempts, formatTime(secondsElapsed),
-                        "Breakdown Text", true
+                        showBreakdown(target, guessHistory, isWin), true
                 );
                 onRoundEnded(gameResults);
             } else {
@@ -172,7 +172,7 @@ public class GameViewController {
                     PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
                             isWin, "Game Over", "You ran out of attempts.",
                             score, totalScore, playerAttempts, totalAttempts, formatTime(timerStart - remainingSeconds),
-                            "Breakdown Text", true
+                            showBreakdown(target, guessHistory, isWin), true
                     );
                     onRoundEnded(gameResults);
                 } else {
@@ -275,7 +275,7 @@ public class GameViewController {
             PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
                     isWin, "Game Over", "You ran out of time.",
                     score, totalScore, playerAttempts, totalAttempts, formatTime(timerStart - remainingSeconds),
-                    "Breakdown Text", true
+                    showBreakdown(target, guessHistory, isWin), true
             );
             onRoundEnded(gameResults);
         } else {
@@ -340,11 +340,22 @@ public class GameViewController {
             PostRoundDialogController.Result gameResults = new PostRoundDialogController.Result(
                     isWin, "End Of Rounds!", "Congratulations! Check the leaderboard to know your ranking",
                     score, totalScore, playerAttempts, totalAttempts, formatTime(timerStart - remainingSeconds),
-                    "Breakdown Text", false
+                    showBreakdown(target, guessHistory, isWin), false
             );
             onRoundEnded(gameResults);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    // Call this after a round finishes or when you want to show stats
+    public String showBreakdown(int targetNumber, ListView<String> guessHistory, boolean won) {
+        int totalGuesses = guessHistory.getItems().size();
+
+        return "Round summary\n\n" +
+                "-> Target number: " + targetNumber +
+                "\n-> Total guesses: " + totalGuesses +
+                "\n-> Result: " + (won ? "Win" : "Lose");
+    }
+
 }
