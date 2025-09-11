@@ -15,10 +15,10 @@ Guess Master is a small-but-complete desktop project that demonstrates clean UI 
 
 * Modern, professional desktop UI built with **JavaFX** (FXML + CSS).
 * Smooth UX: modal overlays, animations, focused keyboard flow.
-* Gameplay features: single-player, local 2-player, configurable rounds, attempt limits, scoring & streaks.
-* Leaderboard with pagination, search & export.
-* Clean separation: `controllers`, `services`, `models`, `utils`.
-* Easily packaged for distribution (Maven + JavaFX plugin), ready for screenshots/video in a portfolio.
+* Gameplay features: single-player, configurable rounds, attempt limits, scoring.
+* Leaderboard with search & CSV export.
+* Clean separation: `controllers`, `services`, `config`, `utils`.
+* Easily packaged for distribution (Maven + JavaFX plugin).
 
 ---
 
@@ -26,8 +26,8 @@ Guess Master is a small-but-complete desktop project that demonstrates clean UI 
 
 * **Single Player** — Guess the hidden number, hints of higher/lower, attempts limited.
 * **Online Multiplayer** — Players can connect through web sockets.
-* **Leaderboard** — Top scores, filtering (all time / 30d / 7d), search, export CSV.
-* **Scoring system** — Base points + difficulty multiplier + speed & accuracy bonuses + win streaks.
+* **Leaderboard** — Top scores, filtering (all time / 7d / 1d), search, export CSV.
+* **Scoring system** — Base points + difficulty multiplier + speed & accuracy bonuses.
 * **Post-round dialog** — Modal overlay with round summary, breakdown of points, next/replay/menu options.
 * **Polished UI** — Card surfaces, gradients, subtle shadows, consistent typography, keyboard navigation.
 
@@ -76,8 +76,6 @@ guess-master/
 
 ## 🛠️ How to run (developer)
 
-These commands assume a Maven project configured with `javafx-maven-plugin`.
-
 ### Run with Maven
 
 ```bash
@@ -121,23 +119,13 @@ java --module-path /path/to/javafx-sdk/lib --add-modules javafx.controls,javafx.
 
 ---
 
-## ⚠️ Common troubleshooting tips
-
-* **FXML vs Runtime mismatch:** Scene Builder can save FXML for newer JavaFX API versions. Use a JavaFX runtime compatible with the FXML version or re-save FXML with a compatible Scene Builder.
-* **NoClassDefFound/ClassNotFound for icon libs:** Use modern icon libs (Ikonli) instead of old FontAwesomeFX which depends on JavaFX internals.
-* **TableView reflection issues (records & modules):** either open packages in `module-info.java` to `javafx.base` **or** use lambda-based `cellValueFactory` (preferred) to avoid reflective access.
-* **Resource loading returning null:** use absolute classpath paths with leading slash: `getResource("/com/guessing/gamemaster/fxml/game-view.fxml")`.
-* **CSS parse warnings:** check line numbers in console; syntax differences can cause entire rules to be ignored.
-
----
-
 ## 📐 Architecture & design decisions
 
 * **Controller thinness:** Controllers handle UI events and delegate game logic to `GameService`. This enables unit testing of game rules independently.
-* **Service layer:** `GameService` encapsulates rounds, random number generation, attempt handling, scoring, and persistence calls to `LeaderboardService`.
+* **Service layer:** `GameService` encapsulates rounds, random number generation, attempt handling, scoring.
 * **Dialog & overlay pattern:** Use `StackPane` root and preload modal dialogs (post-round) as hidden nodes — fast show/hide, simple animations, and consistent styling.
-* **Scoring system:** base points + difficulty multiplier + speed & accuracy bonuses + streak multiplier. Designed to reward skill and speed.
-* **Persistence:** small, local SQLite DB (or JSON for simple demos). Leaderboard queries use pagination & date filters.
+* **Scoring system:** base points + difficulty multiplier + speed & accuracy bonuses. Designed to reward skill and speed.
+* **Persistence:** small, local H2 DB. Leaderboard queries use name & date filters.
 
 ---
 
